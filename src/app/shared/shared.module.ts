@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -10,11 +12,14 @@ import { FooterComponent } from './components/footer/footer.component';
     FooterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule,
+    NgbModule
   ],
   exports: [
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    HttpClientModule
   ]
 })
 export class SharedModule { }
