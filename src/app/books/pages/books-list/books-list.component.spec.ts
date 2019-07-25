@@ -4,6 +4,7 @@ import { BooksListComponent } from './books-list.component';
 import { BooksService } from '../../shared/books.service';
 import { Book } from '../../shared/book';
 import { of } from 'rxjs';
+import { BookCardComponent } from '../../components/book-card/book-card.component';
 
 describe('BooksListComponent', () => {
   let component: BooksListComponent;
@@ -20,7 +21,7 @@ describe('BooksListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BooksListComponent ],
+      declarations: [ BooksListComponent, BookCardComponent ],
       providers: [{provide: BooksService, useValue: booksServiceSpy}]
     })
     .compileComponents();
@@ -33,7 +34,24 @@ describe('BooksListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create component', () => {
     expect(component).toBeTruthy();
+    expect(component.loader).toEqual(false);
   });
+
+  xit('should pass loader to true when getBooks is called', () => {
+    // When
+    component.getBooks();
+
+    // Then
+    expect(component.loader).toEqual(true);
+  })
+
+  it('should pass loader to false when getBooks succeed', async () => {
+    // When
+    await component.getBooks();
+
+    // Then
+    expect(component.loader).toEqual(false);
+  })
 });

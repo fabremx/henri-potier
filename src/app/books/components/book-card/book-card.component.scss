@@ -1,0 +1,17 @@
+.book-card {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  border: solid black 1px;
+  vertical-align: top;
+
+  &__img-container {
+    width: 100%;
+    text-align: center;
+
+    img  {
+      width: 150px;
+      height: 150px;
+    }
+  }
+}

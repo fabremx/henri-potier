@@ -1,1 +1,14 @@
 <p>books-list works!</p>
+
+<div *ngIf="loader; else booksContainer">
+  <img src="assets/img/loader.gif" alt="loader" />
+</div>
+
+<ng-template #booksContainer>
+  <div *ngIf="books.length; then bookList else noBooks"></div>
+  <ng-template #bookList>
+      <app-book-card *ngFor="let book of books" [book]="book"></app-book-card>
+  </ng-template>
+  <ng-template #noBooks>No books.</ng-template>
+</ng-template>
+

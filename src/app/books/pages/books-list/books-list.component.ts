@@ -8,7 +8,8 @@ import { Book } from '../../shared/book';
   styleUrls: ['./books-list.component.scss']
 })
 export class BooksListComponent implements OnInit {
-  bookList: Book[];
+  books: Book[] = [];
+  loader: boolean = false;
 
   constructor(private booksService: BooksService) { }
 
@@ -17,13 +18,17 @@ export class BooksListComponent implements OnInit {
   }
 
   getBooks() {
+    this.loader = true;
+
     this.booksService.getBooks()
       .subscribe((books: Book[]) => {
-        this.bookList = books;
-        console.log('Books recieved', this.bookList);
+        this.books = books;
+        this.loader = false;
+        console.log('Books recieved', this.books);
       },
       (error) => {
-        console.log('error');
+        this.loader = false;
+        console.log('error', error);
       });
   }
 }

@@ -1,0 +1,15 @@
+<div *ngIf="book" class="book-card col-md-3">
+  <div class="book-card__img-container">
+    <img [src]="book.cover" [alt]="book.title" />
+  </div>
+
+  <p>
+    <b>Titre:</b> {{ book.title }}<br />
+    <b>Prix:</b> {{ book.price }}
+  </p>
+
+  <p>Synopsis:</p>
+  <div *ngFor="let info of book.synopsis">
+    <p class="book-card__p">{{ info }}</p>
+  </div>
+</div>

@@ -52,10 +52,9 @@ describe('Book Service', () => {
 
         // When
         booksService.getBooks().subscribe(() => {}, (error) => {
-          expect(error).toThrowError('Server down !');
+          // Then
+          expect(error).toEqual(new Error('Server down !'));
         });
-
-        expect(booksService.getBooks).toThrowError();
       });
   });
 });
