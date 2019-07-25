@@ -10,6 +10,6 @@ export class Book {
     this.title = book.title || '';
     this.price = book.price || 0;
     this.cover = book.cover || '';
-    this.synopsis = book.synopsis || '';
+    this.synopsis = book.synopsis || [];
   }
 }

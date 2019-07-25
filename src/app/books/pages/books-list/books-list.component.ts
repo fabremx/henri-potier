@@ -3,11 +3,11 @@ import { BooksService } from '../../shared/books.service';
 import { Book } from '../../shared/book';
 
 @Component({
-  selector: 'app-books',
-  templateUrl: './books.component.html',
-  styleUrls: ['./books.component.scss']
+  selector: 'app-books-list',
+  templateUrl: './books-list.component.html',
+  styleUrls: ['./books-list.component.scss']
 })
-export class BooksComponent implements OnInit {
+export class BooksListComponent implements OnInit {
   bookList: Book[];
 
   constructor(private booksService: BooksService) { }
@@ -26,5 +26,4 @@ export class BooksComponent implements OnInit {
         console.log('error');
       });
   }
-
 }

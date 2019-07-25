@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "cross-env TS_NODE_COMPILER_OPTIONS={\\\"module\\\":\\\"commonjs\\\"} ./node_modules/.bin/mocha -r ts-node/register -r ignore-styles -r jsdom-global/register src/**/*.spec.ts",
+    "test": "cross-env TS_NODE_COMPILER_OPTIONS={\\\"module\\\":\\\"commonjs\\\"} ./node_modules/.bin/mocha -r ts-node/register -r ignore-styles -r jsdom-global/register 'src/**/*.spec.ts'",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
