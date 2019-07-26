@@ -9,6 +9,7 @@ import { Book } from '../../shared/book';
 })
 export class BooksListComponent implements OnInit {
   books: Book[] = [];
+  booksDisplayed: Book[] = [];
   loader: boolean = false;
 
   constructor(private booksService: BooksService) { }
@@ -17,18 +18,27 @@ export class BooksListComponent implements OnInit {
     this.getBooks();
   }
 
-  getBooks() {
+  getBooks(): void {
     this.loader = true;
 
     this.booksService.getBooks()
       .subscribe((books: Book[]) => {
         this.books = books;
+        this.booksDisplayed = this.books;
         this.loader = false;
-        console.log('Books recieved', this.books);
       },
       (error) => {
         this.loader = false;
-        console.log('error', error);
+        alert('Oups something went wrong !');
       });
+  }
+
+  updateBookList(userSearch: string): void {
+    if (!userSearch)  {
+      this.booksDisplayed = this.books;
+      return;
+    };
+
+    this.booksDisplayed = this.books.filter(book => book.title.toLowerCase().includes(userSearch.toLowerCase()));
   }
 }

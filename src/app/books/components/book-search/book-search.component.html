@@ -1,0 +1,4 @@
+<div class="book-search">
+    <input #searchInput type="text" class="form-control" placeholder="Recherche" [(ngModel)]="userSearch" (keyup.enter)="search(userSearch)">
+    <button type="button" class="btn btn-outline-info" (click)="search(searchInput.value)">Rechercher</button> 
+</div>

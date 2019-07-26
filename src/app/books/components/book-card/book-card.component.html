@@ -1,4 +1,4 @@
-<div *ngIf="book" class="book-card col-md-3">
+<div *ngIf="book" class="book-card">
   <div class="book-card__img-container">
     <img [src]="book.cover" [alt]="book.title" />
   </div>
@@ -12,4 +12,6 @@
   <div *ngFor="let info of book.synopsis">
     <p class="book-card__p">{{ info }}</p>
   </div>
+
+  <button type="button" class="btn btn-warning">Warning</button>
 </div>

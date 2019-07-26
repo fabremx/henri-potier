@@ -1,0 +1,14 @@
+.book-search {
+  input, button {
+    display: inline-block;
+  }
+
+  input {
+    width: 25%;
+    margin: 0 10px;
+  }
+
+  button {
+    vertical-align: top
+  }
+}
