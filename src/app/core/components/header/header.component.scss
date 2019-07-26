@@ -1,0 +1,15 @@
+.navbar {
+  &__logo {
+    width: 45px;
+    height: 45px;
+  }
+
+  &__shopping-cart {
+    img {
+      width: 25px;
+      height: 25px;
+      vertical-align: top;
+      margin-right: 5px;
+    }
+  }
+}

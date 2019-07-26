@@ -1,16 +1,19 @@
-<p>books-list works!</p>
-<app-book-search (searchEmitter)="updateBookList($event)"></app-book-search>
+<div class="book-list">
+  <h3 class="book-list__title">Promotions sur ces ventes :</h3>
 
-<div *ngIf="loader; else booksContainer">
-  <img src="assets/img/loader.gif" alt="loader" />
-</div>
-
-<ng-template #booksContainer>
-  <div *ngIf="books.length; then bookList else noBooks"></div>
-  <ng-template #bookList>
-    <div class="row">
-      <app-book-card *ngFor="let book of booksDisplayed" [book]="book"></app-book-card>
-    </div>
+  <app-book-search (searchEmitter)="updateBookList($event)"></app-book-search>
+  
+  <div *ngIf="loader; else booksContainer">
+    <img src="assets/img/loader.gif" alt="loader" />
+  </div>
+  
+  <ng-template #booksContainer>
+    <div *ngIf="books.length; then bookList else noBooks"></div>
+    <ng-template #bookList>
+      <div class="row">
+        <app-book-card *ngFor="let book of booksDisplayed" [book]="book"></app-book-card>
+      </div>
+    </ng-template>
+    <ng-template #noBooks>No books.</ng-template>
   </ng-template>
-  <ng-template #noBooks>No books.</ng-template>
-</ng-template>
+</div>

@@ -3,15 +3,17 @@
     <img [src]="book.cover" [alt]="book.title" />
   </div>
 
-  <p>
-    <b>Titre:</b> {{ book.title }}<br />
-    <b>Prix:</b> {{ book.price }}
-  </p>
+  <div class="book-card__information">
+    <p>
+      <b>Titre:</b> {{ book.title }}<br />
+      <b>Prix:</b> {{ book.price }}
+    </p>
 
-  <p>Synopsis:</p>
-  <div *ngFor="let info of book.synopsis">
-    <p class="book-card__p">{{ info }}</p>
+    <button type="button" class="btn btn-warning" (click)="addBookToShoppingCart(book)">Ajouter au panier</button>
   </div>
 
-  <button type="button" class="btn btn-warning">Warning</button>
+  <!-- <p>Synopsis:</p>
+  <div *ngFor="let info of book.synopsis">
+    <p class="book-card__p">{{ info }}</p>
+  </div> -->
 </div>

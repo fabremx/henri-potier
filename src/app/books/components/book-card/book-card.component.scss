@@ -1,17 +1,27 @@
 .book-card {
   display: inline-block;
+  width: 250px;
+  height: 428px;
   margin: 10px;
-  padding: 10px;
   border: solid black 1px;
+  overflow: hidden;
   vertical-align: top;
 
   &__img-container {
     width: 100%;
+    padding: 10px;
+    background-color: #F7F7F7;
     text-align: center;
 
     img  {
-      width: 150px;
-      height: 150px;
+      width: 180px;
+      height: 250px;
+      margin-bottom: 10px;
     }
+  }
+
+  &__information {
+    padding: 10px;
+    background-color: #FAFAFA;
   }
 }

@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { ShoppingCartService } from './shared/services/shopping-cart.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { BrowserModule } from '@angular/platform-browser';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ShoppingCartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
