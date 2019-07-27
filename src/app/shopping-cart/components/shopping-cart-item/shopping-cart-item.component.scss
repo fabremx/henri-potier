@@ -1,0 +1,28 @@
+.shopping-cart-item {
+  width: 100%;
+  padding: 10px;
+  border-bottom: solid #DDDDDD 1px;
+
+  &__img, &__title, &__price, &__quantity {
+    display: inline-block;
+    padding: 10px 20px;
+  }
+
+  &__img img {
+    width: 100px;
+    height: 140px;
+  }
+
+  &__title {
+    // width: 50%;
+    color: #232F3E;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  &__price {
+    color: #B12704;
+    font-size: 18px;
+    font-weight: bold;
+  }
+}

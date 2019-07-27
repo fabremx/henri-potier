@@ -1,19 +1,30 @@
 
 <div class="shopping-cart">
   <h3>Votre panier</h3>
-  
-  <ng-container *ngIf="shoppingCart">
-    <div *ngFor="let book of shoppingCart.bookList">
-      <img [src]="book.cover" [alt]="book.title">
-      {{ book.title }}
-      Prix: {{ book.price }}
-      Quantité: ...
+
+  <div *ngIf="this.shoppingCart.bookList && this.shoppingCart.bookList.length; then shoppingCartList else emptyCart"></div>
+
+  <ng-template #shoppingCartList>
+    <div class="shopping-cart__items-container">
+      <div class="shopping-cart__items-header">
+        <div class="col-md-7 offset-md-2">Titre</div>
+        <div class="col-md-1">Prix</div>
+        <div class="col-md-1">Quantité</div>
+      </div>
+
+      <app-shopping-cart-item *ngFor="let book of shoppingCart.bookList" [book]="book"></app-shopping-cart-item>
     </div>
-  
-    <div>
-      Prix total: ..
-      Prix Total après réductions: ..
+      
+    <div class="shopping-cart__items-price">
+      <p>
+          Total (2 articles) avant réductions: ..<br/>
+          Prix Total après réductions: ..
+      </p> 
     </div>
-  </ng-container>
+  </ng-template>
+
+  <ng-template #emptyCart>
+    Votre panier est vide. Retournez à la <a [routerLink]="['']">liste des livres</a>
+  </ng-template>
 </div>
 

@@ -1,0 +1,18 @@
+.shopping-cart {
+  padding: 20px;
+
+  &__items-header {
+    width: 100%;
+    border-bottom: solid 1px #DDDDDD;
+
+    div {
+      display: inline-block;
+      padding: 10px;
+      font-weight: bold;
+    }
+  }
+
+  &__items-price {
+    margin-top: 20px;
+  }
+}

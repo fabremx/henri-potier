@@ -8,9 +8,11 @@ import { ShoppingCart } from '../models/shopping-cart';
 })
 export class ShoppingCartService {
   shoppingCartSubject: Subject<any> = new Subject<any>();
-  shoppingCart: ShoppingCart = new ShoppingCart();
+  shoppingCart: ShoppingCart;
 
-  constructor() { }
+  constructor() { 
+    this.shoppingCart = new ShoppingCart();
+  }
 
   getShoppingCart(): ShoppingCart {
     return this.shoppingCart;

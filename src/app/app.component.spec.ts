@@ -3,6 +3,7 @@ import { AppComponent } from './app.component';
 
 import { RouterTestingModule } from '@angular/router/testing';
 import { CoreModule } from './core/core.module';
+import { RouterModule } from '@angular/router';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -12,6 +13,7 @@ describe('AppComponent', () => {
       ],
       imports: [
         RouterTestingModule,
+        RouterModule.forRoot([]),
         CoreModule
       ]
     }).compileComponents();
