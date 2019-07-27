@@ -7,6 +7,10 @@ const routes: Routes = [
   { 
     path: RoutesConfig.books,
     loadChildren: () => import('./books/books.module').then(m => m.BooksModule)
+  },
+  { 
+    path: RoutesConfig.shoppingCart,
+    loadChildren: () => import('./shopping-cart/shopping-cart.module').then(m => m.ShoppingCartModule)
   }
 ];
 

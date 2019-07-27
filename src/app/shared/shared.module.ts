@@ -10,15 +10,13 @@ import { FormsModule } from '@angular/forms';
     NgbModule,
     CommonModule,
     HttpClientModule,
-    FormsModule,
-    NgbModule
+    FormsModule
   ],
   exports: [
     NgbModule,
     CommonModule,
     HttpClientModule,
-    FormsModule,
-    NgbModule
+    FormsModule
   ]
 })
 export class SharedModule { }

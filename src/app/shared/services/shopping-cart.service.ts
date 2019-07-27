@@ -1,27 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Book } from 'src/app/books/shared/book';
 import { Subject, Observable } from 'rxjs';
+import { ShoppingCart } from '../models/shopping-cart';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingCartService {
   shoppingCartSubject: Subject<any> = new Subject<any>();
-
-  cart: Book[] = [];
-  price: number = 0;
+  shoppingCart: ShoppingCart = new ShoppingCart();
 
   constructor() { }
 
-  getShoppingCart(): Book[] {
-    return this.cart;
+  getShoppingCart(): ShoppingCart {
+    return this.shoppingCart;
   }
 
   addBookToShoppingCart(book: Book): void {
     if (!book)  return;
 
-    this.cart.push(book);
-    this.shoppingCartSubject.next(this.cart);
+    this.shoppingCart.bookList.push(book);
+    this.shoppingCartSubject.next(this.shoppingCart.bookList);
   }
 
   getShoppingCartChange(): Observable<any> {
@@ -29,6 +28,6 @@ export class ShoppingCartService {
   }
 
   getPrice(): Number {
-    return this.price;
+    return this.shoppingCart.price;
   }
 }

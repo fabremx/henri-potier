@@ -1,0 +1,19 @@
+
+<div class="shopping-cart">
+  <h3>Votre panier</h3>
+  
+  <ng-container *ngIf="shoppingCart">
+    <div *ngFor="let book of shoppingCart.bookList">
+      <img [src]="book.cover" [alt]="book.title">
+      {{ book.title }}
+      Prix: {{ book.price }}
+      Quantité: ...
+    </div>
+  
+    <div>
+      Prix total: ..
+      Prix Total après réductions: ..
+    </div>
+  </ng-container>
+</div>
+

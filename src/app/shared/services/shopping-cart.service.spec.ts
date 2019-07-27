@@ -16,14 +16,14 @@ describe('ShoppingCartService', () => {
   });
 
   it('should instantiate values of the service', () => {
-    expect(service.cart).toEqual([]);
-    expect(service.price).toEqual(0);
+    expect(service.shoppingCart.bookList).toEqual([]);
+    expect(service.shoppingCart.price).toEqual(0);
   });
 
   describe('addBookToShoppingCart', () => {
     it('should add a new book in shopping cart when book is correct book', () => {
       // Given
-      service.cart = [new Book({
+      service.shoppingCart.bookList = [new Book({
         isbn: 'isbn2',
         title: 'title 2',
         price: 50,
@@ -60,13 +60,13 @@ describe('ShoppingCartService', () => {
       service.addBookToShoppingCart(bookToAdd);
 
       // Then
-      expect(service.cart.length).toEqual(2);
-      expect(service.cart).toEqual(expectedResult);
+      expect(service.shoppingCart.bookList.length).toEqual(2);
+      expect(service.shoppingCart.bookList).toEqual(expectedResult);
     });
 
     it('should not add book when book to add is undefined', () => {
       // Given
-      service.cart = [new Book({
+      service.shoppingCart.bookList = [new Book({
         isbn: 'isbn2',
         title: 'title 2',
         price: 50,
@@ -89,8 +89,8 @@ describe('ShoppingCartService', () => {
       service.addBookToShoppingCart(bookToAdd);
 
       // Then
-      expect(service.cart.length).toEqual(1);
-      expect(service.cart).toEqual(expectedResult);
+      expect(service.shoppingCart.bookList.length).toEqual(1);
+      expect(service.shoppingCart.bookList).toEqual(expectedResult);
     });
 
     it('should emit shopping cart when book to add is not undefined', () => {
