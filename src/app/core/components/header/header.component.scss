@@ -1,7 +1,14 @@
 .navbar {
+  background-color: #232F3E;
+  color: white;
+
   &__logo {
     width: 45px;
     height: 45px;
+  }
+
+  .navbar-collapse .navbar-nav a {
+    color: white;
   }
 
   &__shopping-cart {
@@ -10,6 +17,14 @@
       height: 25px;
       vertical-align: top;
       margin-right: 5px;
+      margin-top: 5px;
+    }
+
+    &--lg-orange {
+      font-size: 24px;
+      color: #F08804;
+      vertical-align: sub;
+      margin-left: 5px;
     }
   }
 }

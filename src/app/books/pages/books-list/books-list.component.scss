@@ -1,7 +1,16 @@
 .book-list {
   padding: 20px;
 
+  &__loader {
+    margin: 30px;
+    text-align: center;
+  }
+
   &__title {
     margin-bottom: 20px;
+  }
+
+  &__items-container {
+    margin: auto;
   }
 }

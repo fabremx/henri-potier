@@ -1,9 +1,8 @@
 .book-card {
-  display: inline-block;
   width: 250px;
   height: 428px;
-  margin: 10px;
-  border: solid black 1px;
+  display: inline-block;
+  margin: 15px 3px;
   overflow: hidden;
   vertical-align: top;
 
@@ -23,5 +22,10 @@
   &__information {
     padding: 10px;
     background-color: #FAFAFA;
+
+    button img {
+      width: 20px;
+      margin-right: 8px;
+    }
   }
 }

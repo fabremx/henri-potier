@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg">
   <img class="navbar__logo navbar-brand" src="assets/img/logo.png" alt="logo HPS" href="#">
   
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,12 +8,11 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <a class="nav-item nav-link active" href="#">Accueil <span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="#">Panier</a>
     </div>
   </div>
 
   <div class="navbar__shopping-cart">
-    <img src="assets/img/cart.png" alt="shopping cart">
-    Votre panier: <span>{{ nbItemsInShoppingCart }}</span>
+    <img src="assets/img/cart-white.png" alt="shopping cart">
+    Votre panier: <span class="navbar__shopping-cart--lg-orange">{{ nbItemsInShoppingCart }}</span>
   </div>
 </nav>
