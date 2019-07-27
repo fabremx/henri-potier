@@ -8,6 +8,10 @@
     padding: 10px 20px;
   }
 
+  &__title, &__price, &__quantity {
+    line-height: 130px;
+  }
+
   &__img img {
     width: 100px;
     height: 140px;
@@ -24,5 +28,19 @@
     color: #B12704;
     font-size: 18px;
     font-weight: bold;
+  }
+
+  &__deletion {
+    text-align: center;
+    
+    img {
+      width: 25px;
+      height: 25px;
+      margin-top: 60px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }

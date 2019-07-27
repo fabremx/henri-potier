@@ -9,10 +9,16 @@ import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.servi
 })
 export class ShoppingCartListComponent implements OnInit {
   shoppingCart: ShoppingCart;
+  totalPriceBeforeDiscount: number;
 
   constructor(private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit() {
     this.shoppingCart = this.shoppingCartService.getShoppingCart();
+    this.totalPriceBeforeDiscount = this.getTotalPriceBeforeDiscount();
+  }
+
+  getTotalPriceBeforeDiscount(): number {
+    return this.shoppingCart.bookList.reduce((sum, book) => (sum + book.price), 0);
   }
 }

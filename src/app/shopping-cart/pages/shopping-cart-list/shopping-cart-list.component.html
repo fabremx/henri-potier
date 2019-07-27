@@ -7,7 +7,7 @@
   <ng-template #shoppingCartList>
     <div class="shopping-cart__items-container">
       <div class="shopping-cart__items-header">
-        <div class="col-md-7 offset-md-2">Titre</div>
+        <div class="col-md-6 offset-md-2">Titre</div>
         <div class="col-md-1">Prix</div>
         <div class="col-md-1">Quantité</div>
       </div>
@@ -17,7 +17,7 @@
       
     <div class="shopping-cart__items-price">
       <p>
-          Total (2 articles) avant réductions: ..<br/>
+          Total (<b>{{ shoppingCart.bookList.length }} article(s)</b>) avant réductions: <span class="shopping-cart__items-price--lg-red">EUR {{ totalPriceBeforeDiscount }}</span><br/>
           Prix Total après réductions: ..
       </p> 
     </div>

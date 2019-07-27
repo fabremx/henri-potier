@@ -14,5 +14,13 @@
 
   &__items-price {
     margin-top: 20px;
+    font-size: 16px;
+    text-align: right;
+
+    &--lg-red {
+      color: #B12704;
+      font-size: 18px;
+      font-weight: bold
+    }
   }
 }

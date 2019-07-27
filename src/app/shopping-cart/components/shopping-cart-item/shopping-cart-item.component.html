@@ -1,18 +1,22 @@
-<div class="shopping-cart-item">
+<div class="shopping-cart-item row">
   <div class="shopping-cart-item__img col-md-2">
     <img [src]="book.cover" [alt]="book.title">
   </div>
 
-  <div class="shopping-cart-item__title col-md-7">
-      {{ book.title }}
+  <div class="shopping-cart-item__title col-md-6">
+    {{ book.title }}
   </div>
 
   <div class="shopping-cart-item__price col-md-1">
-      EUR {{ book.price }}
+    EUR {{ book.price }}
   </div>
 
   <div class="shopping-cart-item__quantity col-md-1">
-      Quantité: ...
+    Quantité: ...
+  </div>
+
+  <div class="shopping-cart-item__deletion col-md-2">
+    <img src="assets/img/delete.png" alt="supprimer l'article">
   </div>
 </div>
 
