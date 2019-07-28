@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Book } from 'src/app/books/shared/book';
+import { BookQuantity } from '../../shared/book-quantity';
 
 @Component({
   selector: 'app-shopping-cart-item',
@@ -7,7 +7,7 @@ import { Book } from 'src/app/books/shared/book';
   styleUrls: ['./shopping-cart-item.component.scss']
 })
 export class ShoppingCartItemComponent implements OnInit {
-  @Input() book: Book;
+  @Input() bookWithQuantity: BookQuantity;
 
   constructor() { }
 

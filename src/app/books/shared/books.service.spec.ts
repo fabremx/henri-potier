@@ -26,35 +26,38 @@ describe('Book Service', () => {
     expect(booksService).toBeTruthy();
   });
     
-    describe(('getBooks'), () => {
-      it('should call correct API URL', async () => {
-        // When
-        await booksService.getBooks();
+  describe(('getBooks'), () => {
+    it('should call correct API URL', async () => {
+      // Given
+      const expectedUrl = 'http://henri-potier.xebia.fr/books';
+  
+      // When
+      await booksService.getBooks();
 
+      // Then
+      expect(httpClientSpy.get).toHaveBeenCalledWith(expectedUrl);
+    });
+
+    it('should return array of Book instance when server responding', () => {
+      // Given
+      const expectedResult = [new Book(stubBooks[0])];
+
+      // When
+      booksService.getBooks().subscribe((books) => {
         // Then
-        expect(httpClientSpy.get).toHaveBeenCalledWith(ApiURLConfig.booksURL);
-      });
-
-      it('should return array of Book instance when server responding', () => {
-        // Given
-        const expectedResult = [new Book(stubBooks[0])];
-
-        // When
-        booksService.getBooks().subscribe((books) => {
-          // Then
-          expect(books).toEqual(expectedResult);
-        })
+        expect(books).toEqual(expectedResult);
       })
+    })
 
-      it('should return an error when server isn\'t respond', () => {
-        // Given
-        httpClientSpy.get.and.returnValue(throwError(new Error('Server down !')));
+    it('should return an error when server isn\'t respond', () => {
+      // Given
+      httpClientSpy.get.and.returnValue(throwError(new Error('Server down !')));
 
-        // When
-        booksService.getBooks().subscribe(() => {}, (error) => {
-          // Then
-          expect(error).toEqual(new Error('Server down !'));
-        });
+      // When
+      booksService.getBooks().subscribe(() => {}, (error) => {
+        // Then
+        expect(error).toEqual(new Error('Server down !'));
       });
+    });
   });
 });

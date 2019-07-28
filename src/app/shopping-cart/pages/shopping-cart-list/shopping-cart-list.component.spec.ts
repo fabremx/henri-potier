@@ -4,6 +4,8 @@ import { ShoppingCartListComponent } from './shopping-cart-list.component';
 import { ShoppingCartItemComponent } from '../../components/shopping-cart-item/shopping-cart-item.component';
 import { RouterModule } from '@angular/router';
 import { Book } from 'src/app/books/shared/book';
+import { BookQuantity } from '../../shared/book-quantity';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('ShoppingCartListComponent', () => {
   let component: ShoppingCartListComponent;
@@ -15,7 +17,10 @@ describe('ShoppingCartListComponent', () => {
         ShoppingCartListComponent,
         ShoppingCartItemComponent
       ],
-      imports: [ RouterModule.forRoot([]) ]
+      imports: [ 
+        RouterModule.forRoot([]),
+        HttpClientModule 
+      ]
     })
     .compileComponents();
   }));
@@ -57,4 +62,62 @@ describe('ShoppingCartListComponent', () => {
       expect(result).toEqual(expectedResult)
     })
   });
+
+  describe('getBookListWithQuantity', () => {
+    it('should return list of book without doublon and with correct quantity', () => {
+      // Given
+      component.shoppingCart.bookList = [
+        new Book({
+          isbn: 'isbn1',
+          title: 'title 1',
+          price: 10,
+          cover: 'cover1',
+          synopsis: ['this', 'is', 'a', 'synopsis']
+        }),
+        new Book({
+          isbn: 'isbn2',
+          title: 'title 2',
+          price: 20,
+          cover: 'cover2',
+          synopsis: ['this', 'is', 'a', 'synopsis']
+        }),
+        new Book({
+          isbn: 'isbn1',
+          title: 'title 1',
+          price: 10,
+          cover: 'cover1',
+          synopsis: ['this', 'is', 'a', 'synopsis']
+        })
+      ];
+
+      const expectedResult: BookQuantity[] = [
+        {
+          book: new Book({
+            isbn: 'isbn1',
+            title: 'title 1',
+            price: 10,
+            cover: 'cover1',
+            synopsis: ['this', 'is', 'a', 'synopsis']
+          }),
+          quantity: 2
+        },
+        {
+          book: new Book({
+            isbn: 'isbn2',
+            title: 'title 2',
+            price: 20,
+            cover: 'cover2',
+            synopsis: ['this', 'is', 'a', 'synopsis']
+          }),
+          quantity: 1
+        }
+      ];
+
+      // When
+      const result = component.getBookListWithQuantity()
+
+      // Then
+      expect(result).toEqual(expectedResult);
+    });
+  })
 });

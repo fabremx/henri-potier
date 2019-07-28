@@ -1,3 +1,5 @@
 export const ApiURLConfig = {
-  booksURL: 'http://henri-potier.xebia.fr/books'
+  baseUrl: 'http://henri-potier.xebia.fr',
+  booksUrl: 'books',
+  discountUrl: 'commercialOffers'
 }

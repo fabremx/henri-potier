@@ -13,7 +13,7 @@ export class BooksService {
   constructor(private http: HttpClient) { }
 
   getBooks(): Observable<Book[]> {
-    return this.http.get(ApiURLConfig.booksURL)
+    return this.http.get(`${ApiURLConfig.baseUrl}/${ApiURLConfig.booksUrl}`)
       .pipe(
         map((books: Array<object>) => {
           return books.map((book) => new Book(book))
