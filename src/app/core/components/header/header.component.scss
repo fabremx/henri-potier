@@ -1,9 +1,11 @@
+@import '../../../shared/styles/colors.scss';
+
 .navbar {
-  background-color: #232F3E;
-  color: white;
+  background-color: $dark-blue;
+  color: $white;
 
   a {
-    color: white;
+    color: $white;
     text-decoration: none;
   }
 
@@ -13,7 +15,7 @@
   }
 
   .navbar-collapse .navbar-nav a {
-    color: white;
+    color: $white;
   }
 
   &__shopping-cart {
@@ -27,7 +29,7 @@
 
     &--lg-orange {
       font-size: 24px;
-      color: #F08804;
+      color: $orange;
       vertical-align: sub;
       margin-left: 5px;
     }

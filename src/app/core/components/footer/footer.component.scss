@@ -1,13 +1,15 @@
+@import '../../../shared/styles/colors.scss';
+
 .footer {
   padding-top: 20px;
-  background-color: #232F3E;
-  color: white;
+  background-color: $dark-blue;
+  color: $white;
 
   &__information hr {
-    background-color: white;
+    background-color: $white;
   }
 
   &__copyright {
-    background-color: #131A22;
+    background-color: $black;
   }
 }

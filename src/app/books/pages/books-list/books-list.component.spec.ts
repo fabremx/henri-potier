@@ -7,6 +7,7 @@ import { of, throwError } from 'rxjs';
 import { BookCardComponent } from '../../components/book-card/book-card.component';
 import { FormsModule } from '@angular/forms';
 import { BookSearchComponent } from '../../components/book-search/book-search.component';
+import { RouterModule } from '@angular/router';
 
 describe('BooksListComponent', () => {
   let component: BooksListComponent;
@@ -32,7 +33,7 @@ describe('BooksListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ BooksListComponent, BookCardComponent, BookSearchComponent ],
-      imports: [FormsModule],
+      imports: [FormsModule, RouterModule.forRoot([])],
       providers: [{provide: BooksService, useValue: booksServiceSpy}]
     })
     .compileComponents();
@@ -46,20 +47,12 @@ describe('BooksListComponent', () => {
     fixture.detectChanges();
   });
 
-  describe('getBooks', () => {
-    it('should create component', () => {
-      expect(component).toBeTruthy();
-      expect(component.loader).toEqual(false);
-    });
-  
-    xit('should pass loader to true when getBooks is called', () => {
-      // When
-      component.getBooks();
-  
-      // Then
-      expect(component.loader).toEqual(true);
-    });
-  
+  it('should create component', () => {
+    expect(component).toBeTruthy();
+    expect(component.loader).toEqual(false);
+  });
+
+  describe('getBooks', () => {  
     it('should pass loader to false when getBooks succeed', async () => {
       // When
       await component.getBooks();
@@ -91,7 +84,7 @@ describe('BooksListComponent', () => {
     });
   });
 
-  describe('userSearch', () => {
+  describe('updateBookList', () => {
     it('should find the book when search is a title book', () => {
       // Given
       const userSearch = "title 1";

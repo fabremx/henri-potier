@@ -1,9 +1,11 @@
+@import '../../../shared/styles/colors.scss';
+
 .shopping-cart {
   padding: 20px;
 
   &__items-header {
     width: 100%;
-    border-bottom: solid 1px #DDDDDD;
+    border-bottom: solid 1px $light-grey;
 
     div {
       display: inline-block;
@@ -22,13 +24,13 @@
     }
 
     &--md-black {
-      color: black;
+      color: $black;
       font-size: 18px;
       font-weight: bold
     }
 
     &--lg-red {
-      color: #B12704;
+      color: $red;
       font-size: 28px;
       font-weight: bold
     }

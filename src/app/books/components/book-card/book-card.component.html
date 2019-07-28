@@ -5,17 +5,12 @@
 
   <div class="book-card__information">
     <p>
-      <b>Titre:</b> {{ book.title }}<br />
-      <b>Prix:</b> {{ book.price }}
-    </p>
+      <span class="book-card__information--clikable" [routerLink]="['/book/', book.isbn]"><b>Titre:</b> {{ book.title }}</span><br>
+      <b>Prix:</b> EUR {{ book.price }}
+    </p> 
 
     <button type="button" class="btn btn-warning" (click)="addBookToShoppingCart(book)">
       <img src="assets/img/cart.png" />Ajouter au panier
     </button>
   </div>
-
-  <!-- <p>Synopsis:</p>
-  <div *ngFor="let info of book.synopsis">
-    <p class="book-card__p">{{ info }}</p>
-  </div> -->
 </div>

@@ -28,8 +28,4 @@ export class ShoppingCartService {
   getShoppingCartChange(): Observable<any> {
     return this.shoppingCartSubject.asObservable();
   }
-
-  getPrice(): Number {
-    return this.shoppingCart.price;
-  }
 }

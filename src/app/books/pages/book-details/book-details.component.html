@@ -1,8 +1,39 @@
 <div class="book-details">
-  <div class="book-details__img">
-    
-  </div>
-  <div class="book-details__information">
 
+  <h3>Informations sur le livre</h3>
+
+  <div *ngIf="loader; else bookContainer" class="book-details__loader">
+    <img src="assets/img/loader.gif" alt="loader" />
   </div>
+
+  <ng-template #bookContainer>
+    <div *ngIf="book; then bookInfo else unknownBook"></div>
+
+    <ng-template #bookInfo class="row">
+        <div class="book-details__img col-md-3">
+          <img [src]="book.cover" [alt]="book.title">
+        </div>
+
+        <div class="book-details__information col-md-9">
+          <p>
+            <b>Titre:</b> {{ book.title }}<br>
+            <b>Prix:</b> EUR {{ book.price }}<br>
+          </p>
+
+          <p><b>Synopsis:</b></p>
+          <div *ngFor="let info of book.synopsis">
+            <p class="book-card__p">{{ info }}</p>
+          </div>
+
+          <div class="book-details__buttons">
+            <button type="button" class="btn btn-outline-dark" [routerLink]="['']">Retour</button>
+            <button type="button" class="btn btn-warning" (click)="addBookToShoppingCart(book)">
+              <img src="assets/img/cart.png" />Ajouter au panier
+            </button>
+          </div>
+        </div>
+    </ng-template>
+
+    <ng-template #unknownBook>Impossible de trouver le livre.</ng-template>
+  </ng-template>
 </div>

@@ -1,7 +1,9 @@
+@import '../../../shared/styles/colors.scss';
+
 .shopping-cart-item {
   width: 100%;
   padding: 10px;
-  border-bottom: solid #DDDDDD 1px;
+  border-bottom: solid $light-grey 1px;
 
   &__img, &__title, &__price, &__quantity {
     display: inline-block;
@@ -18,14 +20,13 @@
   }
 
   &__title {
-    // width: 50%;
-    color: #232F3E;
+    color: $dark-blue;
     font-size: 18px;
     font-weight: bold;
   }
 
   &__price {
-    color: #B12704;
+    color: $red;
     font-size: 18px;
     font-weight: bold;
   }

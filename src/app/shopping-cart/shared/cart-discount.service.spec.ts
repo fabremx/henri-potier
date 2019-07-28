@@ -1,5 +1,3 @@
-import { TestBed } from '@angular/core/testing';
-
 import { CartDiscountService } from './cart-discount.service';
 import { of, throwError } from 'rxjs';
 
@@ -26,7 +24,7 @@ describe('CartDiscountService', () => {
     expect(cartDiscountService).toBeTruthy();
   });
 
-  describe(('getDiscount'), () => {
+  describe(('getDiscountOffers'), () => {
     it('should call correct API URL', async () => {
       // Given
       const isbnList = 'isbn1,isbn2';

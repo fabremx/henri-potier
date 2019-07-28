@@ -1,13 +1,19 @@
 import { BooksService } from './books.service';
 import { Book } from './book';
 import { of, throwError } from 'rxjs';
-import { ApiURLConfig } from 'src/app/configs/apiURL.config';
 
 const stubBooks = [{
-  isbn: 'isbn',
-  title: 'title',
+  isbn: 'isbn1',
+  title: 'title1',
   price: 10,
-  cover: 'cover',
+  cover: 'cover1',
+  synopsis: ['this', 'is', 'a', 'synopsis']
+},
+{
+  isbn: 'isbn2',
+  title: 'title2',
+  price: 20,
+  cover: 'cover2',
   synopsis: ['this', 'is', 'a', 'synopsis']
 }];
 
@@ -40,7 +46,10 @@ describe('Book Service', () => {
 
     it('should return array of Book instance when server responding', () => {
       // Given
-      const expectedResult = [new Book(stubBooks[0])];
+      const expectedResult = [
+        new Book(stubBooks[0]),
+        new Book(stubBooks[1])
+      ];
 
       // When
       booksService.getBooks().subscribe((books) => {
@@ -48,6 +57,55 @@ describe('Book Service', () => {
         expect(books).toEqual(expectedResult);
       })
     })
+
+    it('should return an error when server isn\'t respond', () => {
+      // Given
+      httpClientSpy.get.and.returnValue(throwError(new Error('Server down !')));
+
+      // When
+      booksService.getBooks().subscribe(() => {}, (error) => {
+        // Then
+        expect(error).toEqual(new Error('Server down !'));
+      });
+    });
+  });
+
+  describe(('getBook'), () => {
+    it('should call correct API URL', async () => {
+      // Given
+      const isbn = 'isbn1';
+      const expectedUrl = 'http://henri-potier.xebia.fr/books';
+  
+      // When
+      await booksService.getBook(isbn);
+
+      // Then
+      expect(httpClientSpy.get).toHaveBeenCalledWith(expectedUrl);
+    });
+
+    it('should return the Book which match with isbn passed in parameter when server responding', () => {
+      // Given
+      const isbn = 'isbn2'
+      const expectedResult = new Book(stubBooks[1]);
+
+      // When
+      booksService.getBook(isbn).subscribe((book) => {
+        // Then
+        expect(book).toEqual(expectedResult);
+      });
+    });
+
+    it('should return null when isbn passed in parameter is a wrong isbn', () => {
+      // Given
+      const isbn = 'wrongISBN'
+      const expectedResult = null;
+
+      // When
+      booksService.getBook(isbn).subscribe((book) => {
+        // Then
+        expect(book).toEqual(expectedResult);
+      });
+    });
 
     it('should return an error when server isn\'t respond', () => {
       // Given

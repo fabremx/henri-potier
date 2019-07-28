@@ -1,3 +1,5 @@
+@import '../../../shared/styles/colors.scss';
+
 .book-card {
   width: 250px;
   height: 428px;
@@ -9,7 +11,7 @@
   &__img-container {
     width: 100%;
     padding: 10px;
-    background-color: #F7F7F7;
+    background-color: $light-background-grey-1;
     text-align: center;
 
     img  {
@@ -21,7 +23,12 @@
 
   &__information {
     padding: 10px;
-    background-color: #FAFAFA;
+    background-color: $light-background-grey-2;
+
+    &--clikable:hover {
+      color: $orange;
+      cursor: pointer;
+    }
 
     button img {
       width: 20px;
