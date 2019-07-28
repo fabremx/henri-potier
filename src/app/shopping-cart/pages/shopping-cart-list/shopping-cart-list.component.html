@@ -17,8 +17,8 @@
       
     <div class="shopping-cart__items-price">
       <p>
-          Total (<b>{{ shoppingCart.bookList.length }} article(s)</b>) avant réductions: <span class="shopping-cart__items-price--lg-red">EUR {{ totalPriceBeforeDiscount }}</span><br/>
-          Prix Total après réductions: ..
+          <span class="shopping-cart__items-price--xs">Total (<b>{{ shoppingCart.bookList.length }} article(s)</b>) avant réductions: <span class="shopping-cart__items-price--md-black">EUR {{ priceBeforeDiscount }}</span><br/></span>
+          Prix Total après réductions: <span class="shopping-cart__items-price--lg-red">EUR {{ priceAfterDiscount }}</span>
       </p> 
     </div>
   </ng-template>

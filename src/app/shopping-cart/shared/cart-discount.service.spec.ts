@@ -33,7 +33,7 @@ describe('CartDiscountService', () => {
       const expectedUrl = 'http://henri-potier.xebia.fr/books/isbn1,isbn2/commercialOffers';
 
       // When
-      await cartDiscountService.getDiscount(isbnList);
+      await cartDiscountService.getDiscountOffers(isbnList);
 
       // Then
       expect(httpClientSpy.get).toHaveBeenCalledWith(expectedUrl);
@@ -45,7 +45,7 @@ describe('CartDiscountService', () => {
       const expectedResult = stubDiscount;
 
       // When
-      cartDiscountService.getDiscount(isbnList).subscribe((discounts) => {
+      cartDiscountService.getDiscountOffers(isbnList).subscribe((discounts) => {
         // Then
         expect(discounts).toEqual(expectedResult);
       })
@@ -57,10 +57,24 @@ describe('CartDiscountService', () => {
       httpClientSpy.get.and.returnValue(throwError(new Error('Server down !')));
 
       // When
-      cartDiscountService.getDiscount(isbnList).subscribe(() => {}, (error) => {
+      cartDiscountService.getDiscountOffers(isbnList).subscribe(() => {}, (error) => {
         // Then
         expect(error).toEqual(new Error('Server down !'));
       });
+    });
+
+    it('should return an object with empty offers when isbn list is undefined', () => {
+      // Given
+      const isbnList = undefined;
+      const expectedResult = {
+        offers: []
+      };
+
+      // When
+      cartDiscountService.getDiscountOffers(isbnList).subscribe((discounts) => {
+        // Then
+        expect(discounts).toEqual(expectedResult);
+      })
     });
   });
 });

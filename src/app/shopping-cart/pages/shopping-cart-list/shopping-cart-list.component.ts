@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ShoppingCart } from 'src/app/shared/models/shopping-cart';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 import { BookQuantity } from '../../shared/book-quantity';
-import { countBy, find, join } from 'lodash'
+import { countBy, find, join, min } from 'lodash'
 import { CartDiscountService } from '../../shared/cart-discount.service';
+import { DiscountOffers } from '../../shared/discount-offers';
 
 @Component({
   selector: 'app-shopping-cart-list',
@@ -12,18 +13,19 @@ import { CartDiscountService } from '../../shared/cart-discount.service';
 })
 export class ShoppingCartListComponent implements OnInit {
   shoppingCart: ShoppingCart;
-  discounts: any;
   bookListWithQuantity: BookQuantity[] = [];
-  totalPriceBeforeDiscount: number;
+  priceBeforeDiscount: number;
+  priceAfterDiscount: number;
 
   constructor(private shoppingCartService: ShoppingCartService,
     private cartDiscountServive: CartDiscountService) { }
 
   ngOnInit() {
     this.shoppingCart = this.shoppingCartService.getShoppingCart();
-    this.discounts = this.getBooksDiscount();
-    this.totalPriceBeforeDiscount = this.getTotalPriceBeforeDiscount();
     this.bookListWithQuantity = this.getBookListWithQuantity();
+
+    this.priceBeforeDiscount = this.getTotalPriceBeforeDiscount();
+    this.getPriceAfterBestDiscount();
   }
 
   getTotalPriceBeforeDiscount(): number {
@@ -45,14 +47,52 @@ export class ShoppingCartListComponent implements OnInit {
     return booksQuantity;
   }
 
-  getBooksDiscount() {
+  getPriceAfterBestDiscount() {
+    const discountPriceList: Array<number> = []
     const booksOccurence = countBy(this.shoppingCart.bookList, 'isbn');
     const isbnList = Object.keys(booksOccurence);
-    this.cartDiscountServive.getDiscount(join(isbnList, ',')).subscribe((discount) => {
-      console.log('DISCOUNT', discount);
-    },
-    (error) => {
-      alert('error');
-    })
+
+    this.cartDiscountServive.getDiscountOffers(join(isbnList, ','))
+      .subscribe((discountOffers: DiscountOffers) => {
+        discountOffers.offers.forEach(offer => {
+          let priceAfterDiscount;
+          let discountInfo
+
+          switch (offer.type) {
+            case 'percentage':
+              discountInfo = find(discountOffers.offers, ['type', 'percentage']);
+              priceAfterDiscount = this.calculPercentageDiscount(discountInfo);
+              break;
+            case 'minus':
+              discountInfo = find(discountOffers.offers, ['type', 'minus']);
+              priceAfterDiscount = this.calculMinusDiscount(discountInfo);
+              break;
+            case 'slice':
+              discountInfo = find(discountOffers.offers, ['type', 'slice']);
+              priceAfterDiscount = this.calculSliceDiscount(discountInfo);
+              break;
+          }
+
+          discountPriceList.push(priceAfterDiscount);
+        });
+
+        this.priceAfterDiscount = min(discountPriceList);
+      },
+      (error) => {
+        alert('error');
+      });
+  }
+
+  private calculPercentageDiscount(discountInfo) {
+    return this.priceBeforeDiscount - (this.priceBeforeDiscount * (discountInfo.value / 100));
+  }
+
+  private calculMinusDiscount(discountInfo) {
+    return this.priceBeforeDiscount - discountInfo.value
+  }
+
+  private calculSliceDiscount(discountInfo) {
+    const numberOfSlice = Math.floor(this.priceBeforeDiscount / discountInfo.sliceValue);
+    return this.priceBeforeDiscount - (numberOfSlice * discountInfo.value);
   }
 }
