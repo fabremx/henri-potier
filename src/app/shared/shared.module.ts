@@ -3,9 +3,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { Error404Component } from './pages/error404/error404.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    Error404Component
+  ],
   imports: [
     NgbModule,
     CommonModule,

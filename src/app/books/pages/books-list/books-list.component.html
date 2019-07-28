@@ -12,6 +12,10 @@
     <ng-template #bookList>
       <div class="book-list__items-container row">
         <app-book-card *ngFor="let book of booksDisplayed" [book]="book"></app-book-card>
+        
+        <div *ngIf="!booksDisplayed.length">
+          Oups. Nous n'avons pas trouvé votre recherche.
+        </div>
       </div>
     </ng-template>
     <ng-template #noBooks>Aucun livres disponible</ng-template>
