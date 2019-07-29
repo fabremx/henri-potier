@@ -24,4 +24,14 @@ describe('BookSearchComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('search', () => {
+    xit('should emit user search when user press enter in input', () => {
+
+    });
+
+    xit('should emit user search when user click on search button', () => {
+
+    });
+  });
 });

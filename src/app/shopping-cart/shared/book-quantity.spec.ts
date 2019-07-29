@@ -6,14 +6,14 @@ describe('BookQuantity', () => {
     expect(new BookQuantity()).toBeTruthy();
   });
 
-  it('should create an instance of BookQuantity when contructor\'s arg is undefined', () => {
+  it('should create an empty instance of BookQuantity when contructor\'s arg is undefined', () => {
     const bookQuantity = new BookQuantity(undefined);
 
     expect(bookQuantity.book).toBeNull;
     expect(bookQuantity.quantity).toEqual(0);
   });
 
-  it('should create an instance of Book when contructor\'s arg is empty', () => {
+  it('should create an empty instance of Book when contructor\'s arg is empty', () => {
     const bookQuantity = new BookQuantity();
 
     expect(bookQuantity.book).toBeNull;

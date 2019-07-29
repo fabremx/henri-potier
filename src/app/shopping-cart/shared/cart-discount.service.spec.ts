@@ -25,7 +25,7 @@ describe('CartDiscountService', () => {
   });
 
   describe(('getDiscountOffers'), () => {
-    it('should call correct API URL', async () => {
+    it('should call correct API URL when isbnList is not empty', async () => {
       // Given
       const isbnList = 'isbn1,isbn2';
       const expectedUrl = 'http://henri-potier.xebia.fr/books/isbn1,isbn2/commercialOffers';
@@ -37,7 +37,7 @@ describe('CartDiscountService', () => {
       expect(httpClientSpy.get).toHaveBeenCalledWith(expectedUrl);
     });
 
-    it('should return discount when server responding', () => {
+    it('should return discount offers when isbnList isn\'t empty and server responds', () => {
       // Given
       const isbnList = 'isbn1,isbn2';
       const expectedResult = stubDiscount;
@@ -49,7 +49,7 @@ describe('CartDiscountService', () => {
       })
     })
 
-    it('should return an error when server isn\'t respond', () => {
+    it('should return an error when server does not respond', () => {
       // Given
       const isbnList = 'isbn1,isbn2'; 
       httpClientSpy.get.and.returnValue(throwError(new Error('Server down !')));

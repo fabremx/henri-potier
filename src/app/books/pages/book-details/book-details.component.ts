@@ -35,8 +35,9 @@ export class BookDetailsComponent implements OnInit {
         this.book = book;
         this.loader = false;
       },
-      () => {
+      (error) => {
         this.loader = false;
+        console.error(error);
         alert('error');
       });
   }

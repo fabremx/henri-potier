@@ -29,6 +29,7 @@ export class BooksListComponent implements OnInit {
       },
       (error) => {
         this.loader = false;
+        console.error(error);
         alert('Oups something went wrong !');
       });
   }

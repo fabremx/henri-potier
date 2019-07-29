@@ -74,6 +74,7 @@ describe('BooksListComponent', () => {
 
     it('should call alert when getBooks failed', async () => {
       // Given
+      spyOn(console, 'error');
       booksServiceSpy.getBooks.and.returnValue(throwError(new Error('failed!')));
 
       // When
@@ -81,6 +82,7 @@ describe('BooksListComponent', () => {
   
       // Then
       expect(window.alert).toHaveBeenCalled();
+      expect(console.error).toHaveBeenCalled();
     });
   });
 

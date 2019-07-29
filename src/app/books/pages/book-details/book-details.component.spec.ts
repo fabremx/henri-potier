@@ -6,12 +6,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { Book } from '../../shared/book';
 import { throwError, of } from 'rxjs';
 import { BooksService } from '../../shared/books.service';
+import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 
 describe('BookDetailsComponent', () => {
   let component: BookDetailsComponent;
   let fixture: ComponentFixture<BookDetailsComponent>;
+  let instance;
 
   const booksServiceSpy = jasmine.createSpyObj('BooksService', ['getBook']);
+  const shoppingCartServiceSpy = jasmine.createSpyObj('ShoppingCartService', ['addBookToShoppingCart']);
 
   const stubBook = new Book({
     isbn: 'isbn1',
@@ -25,7 +28,10 @@ describe('BookDetailsComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ BookDetailsComponent ],
       imports: [ RouterModule.forRoot([]), HttpClientModule ],
-      providers: [{provide: BooksService, useValue: booksServiceSpy}]
+      providers: [
+        { provide: BooksService, useValue: booksServiceSpy },
+        { provide: ShoppingCartService, useValue: shoppingCartServiceSpy }
+      ]
     })
     .compileComponents();
   }));
@@ -33,7 +39,9 @@ describe('BookDetailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(BookDetailsComponent);
     component = fixture.componentInstance;
+    instance = fixture.debugElement.nativeElement;
     booksServiceSpy.getBook.and.returnValue(of(stubBook));
+    shoppingCartServiceSpy.addBookToShoppingCart.and.returnValue(of());
     spyOn(window, 'alert').and.callThrough();
     fixture.detectChanges();
   });
@@ -71,13 +79,34 @@ describe('BookDetailsComponent', () => {
     it('should call alert when getBooks failed', async () => {
       // Given
       const isbn = 'isbn';
+      spyOn(console, 'error');
       booksServiceSpy.getBook.and.returnValue(throwError(new Error('failed!')));
 
       // When
       await component.getBook(isbn);
   
       // Then
+      expect(console.error).toHaveBeenCalled();
       expect(window.alert).toHaveBeenCalled();
     });
+  });
+
+  describe('addBookToShoppingCart', () => {
+    xit('should render the Add to shopping cart button', async(() => {
+      spyOn(component, 'addBookToShoppingCart');
+      fixture.detectChanges();
+      let button = instance.querySelector('#btn-add-to-cart');
+      expect(button).toBeTruthy();
+    }));
+
+    xit('should call addBookToShoppingCart function', async(() => {
+      spyOn(component, 'addBookToShoppingCart');
+      fixture.detectChanges();
+      let button = instance.querySelector('#btn-add-to-cart');
+      button.click();
+      fixture.detectChanges();
+      expect(component.addBookToShoppingCart).toHaveBeenCalled();
+      expect(shoppingCartServiceSpy.addBookToShoppingCart).toHaveBeenCalled();
+    }));
   });
 });

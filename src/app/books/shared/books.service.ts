@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Book } from './book';
 import { HttpClient } from '@angular/common/http';
-import { map, filter } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ApiURLConfig } from 'src/app/configs/apiURL.config';
 

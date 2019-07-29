@@ -44,7 +44,7 @@ describe('Book Service', () => {
       expect(httpClientSpy.get).toHaveBeenCalledWith(expectedUrl);
     });
 
-    it('should return array of Book instance when server responding', () => {
+    it('should return array of Book instance when server responds', () => {
       // Given
       const expectedResult = [
         new Book(stubBooks[0]),
@@ -58,7 +58,7 @@ describe('Book Service', () => {
       })
     })
 
-    it('should return an error when server isn\'t respond', () => {
+    it('should return an error when server does not respond', () => {
       // Given
       httpClientSpy.get.and.returnValue(throwError(new Error('Server down !')));
 
@@ -83,7 +83,7 @@ describe('Book Service', () => {
       expect(httpClientSpy.get).toHaveBeenCalledWith(expectedUrl);
     });
 
-    it('should return the Book which match with isbn passed in parameter when server responding', () => {
+    it('should return the Book which match with isbn passed in parameter when server responds', () => {
       // Given
       const isbn = 'isbn2'
       const expectedResult = new Book(stubBooks[1]);
@@ -107,7 +107,7 @@ describe('Book Service', () => {
       });
     });
 
-    it('should return an error when server isn\'t respond', () => {
+    it('should return an error when server does not respond', () => {
       // Given
       httpClientSpy.get.and.returnValue(throwError(new Error('Server down !')));
 

@@ -21,7 +21,7 @@ describe('ShoppingCartService', () => {
   });
 
   describe('addBookToShoppingCart', () => {
-    it('should add a new book in shopping cart when book is correct book', () => {
+    it('should add a new book in shopping cart when book is not empty', () => {
       // Given
       service.shoppingCart.bookList = [new Book({
         isbn: 'isbn2',

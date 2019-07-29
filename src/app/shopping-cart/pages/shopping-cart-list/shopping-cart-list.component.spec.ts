@@ -78,7 +78,7 @@ describe('ShoppingCartListComponent', () => {
   });
 
   describe('getBookListWithQuantity', () => {
-    it('should return list of book without doublon and with correct quantity', () => {
+    it('should return list of book without doublon and with the quantity for each book', () => {
       // Given
       component.shoppingCart.bookList = [
         new Book({
@@ -133,10 +133,21 @@ describe('ShoppingCartListComponent', () => {
       // Then
       expect(result).toEqual(expectedResult);
     });
+
+    it('sould return and empty array when there are no books in shopping cart', () => {
+      // Given
+      component.shoppingCart.bookList = [];
+
+      // When
+      const result = component.getBookListWithQuantity()
+
+      // Then
+      expect(result).toEqual([]);
+    });
   });
 
   describe('getPriceAfterBestDiscount', () => {
-    it('should pass corect isbn list as arguments', () => {
+    it('should call getDiscountOffers with correct isbn list', () => {
       // Given
       component.shoppingCart.bookList = [
         new Book({
@@ -163,7 +174,7 @@ describe('ShoppingCartListComponent', () => {
       expect(cartDiscountServiceSpy.getDiscountOffers).toHaveBeenCalledWith(expectedResult);
     });
 
-    it('should a alert to the user when the service respond an error', () => {
+    it('should alert the user when the service responds an error', () => {
       // Given
       cartDiscountServiceSpy.getDiscountOffers.and.returnValue(throwError(new Error('error!')));
 

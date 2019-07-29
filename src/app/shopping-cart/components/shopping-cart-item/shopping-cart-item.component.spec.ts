@@ -19,7 +19,6 @@ describe('ShoppingCartItemComponent', () => {
     quantity: 2
   }
 
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ ShoppingCartItemComponent ],

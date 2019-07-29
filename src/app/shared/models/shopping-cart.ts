@@ -4,8 +4,8 @@ export class ShoppingCart {
   bookList: Book[];
   price: number;
 
-  constructor(shoppingCart: any = {}) {
-    this.bookList = shoppingCart.bookList || [];
-    this.price = shoppingCart.price || 0;
+  constructor(bookList?: Book[], price?: number) {
+    this.bookList = bookList || [];
+    this.price = price || 0;
   }
 }

@@ -19,8 +19,4 @@ export class BookSearchComponent implements OnInit {
   search(search: string): void {
     this.searchEmitter.emit(search);
   }
-
-  protected onSelected(item) {
-    console.log(item? item.title: "");
-  }
 }
