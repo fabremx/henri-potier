@@ -3,11 +3,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BookCardComponent } from './book-card.component';
 import { RouterModule } from '@angular/router';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
+import { Book } from '../../shared/book';
 
 describe('BookCardComponent', () => {
   let component: BookCardComponent;
   let fixture: ComponentFixture<BookCardComponent>;
-  let instance;
 
   const shoppingCartServiceSpy = jasmine.createSpyObj('ShoppingCartService', ['addBookToShoppingCart']);
 
@@ -23,7 +23,6 @@ describe('BookCardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(BookCardComponent);
     component = fixture.componentInstance;
-    instance = fixture.debugElement.nativeElement;
     fixture.detectChanges();
   });
 
@@ -32,21 +31,15 @@ describe('BookCardComponent', () => {
   });
 
   describe('addBookToShoppingCart', () => {
-    xit('should render the Add to shopping cart button', async(() => {
-      spyOn(component, 'addBookToShoppingCart');
-      fixture.detectChanges();
-      let button = instance.querySelector('#btn-add-to-cart');
-      expect(button).toBeTruthy();
-    }));
+    it('should call addBookToShoppingCart function', async(() => {
+      // Given
+      const book = new Book();
 
-    xit('should call addBookToShoppingCart function', async(() => {
-      spyOn(component, 'addBookToShoppingCart');
-      fixture.detectChanges();
-      let button = instance.querySelector('#btn-add-to-cart');
-      button.click();
-      fixture.detectChanges();
-      expect(component.addBookToShoppingCart).toHaveBeenCalled();
-      expect(shoppingCartServiceSpy.addBookToShoppingCart).toHaveBeenCalled();
+      // When
+      component.addBookToShoppingCart(book);
+
+      // Then
+      expect(shoppingCartServiceSpy.addBookToShoppingCart).toHaveBeenCalledWith(book);
     }));
   });
 });

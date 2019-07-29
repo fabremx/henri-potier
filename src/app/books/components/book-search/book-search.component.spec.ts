@@ -26,12 +26,16 @@ describe('BookSearchComponent', () => {
   });
 
   describe('search', () => {
-    xit('should emit user search when user press enter in input', () => {
+    it('should call addBookToShoppingCart function', async(() => {
+      // Given
+      const userSearch = 'search';
+      spyOn(component.searchEmitter, 'emit');
 
-    });
+      // When
+      component.search(userSearch);
 
-    xit('should emit user search when user click on search button', () => {
-
-    });
+      // Then
+      expect(component.searchEmitter.emit).toHaveBeenCalledWith(userSearch);
+    }));
   });
 });

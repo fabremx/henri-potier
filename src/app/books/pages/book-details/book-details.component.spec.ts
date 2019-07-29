@@ -92,21 +92,15 @@ describe('BookDetailsComponent', () => {
   });
 
   describe('addBookToShoppingCart', () => {
-    xit('should render the Add to shopping cart button', async(() => {
-      spyOn(component, 'addBookToShoppingCart');
-      fixture.detectChanges();
-      let button = instance.querySelector('#btn-add-to-cart');
-      expect(button).toBeTruthy();
-    }));
+    it('should call addBookToShoppingCart function', async(() => {
+      // Given
+      const book = new Book();
 
-    xit('should call addBookToShoppingCart function', async(() => {
-      spyOn(component, 'addBookToShoppingCart');
-      fixture.detectChanges();
-      let button = instance.querySelector('#btn-add-to-cart');
-      button.click();
-      fixture.detectChanges();
-      expect(component.addBookToShoppingCart).toHaveBeenCalled();
-      expect(shoppingCartServiceSpy.addBookToShoppingCart).toHaveBeenCalled();
+      // When
+      component.addBookToShoppingCart(book);
+
+      // Then
+      expect(shoppingCartServiceSpy.addBookToShoppingCart).toHaveBeenCalledWith(book);
     }));
   });
 });
