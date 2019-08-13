@@ -8,6 +8,7 @@ import { BookQuantity } from '../../shared/book-quantity';
 import { HttpClientModule } from '@angular/common/http';
 import { CartDiscountService } from '../../shared/cart-discount.service';
 import { of, throwError } from 'rxjs';
+import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 
 describe('ShoppingCartListComponent', () => {
   let component: ShoppingCartListComponent;
@@ -32,7 +33,7 @@ describe('ShoppingCartListComponent', () => {
         RouterModule.forRoot([]),
         HttpClientModule 
       ],
-      providers: [{provide: CartDiscountService, useValue: cartDiscountServiceSpy}]
+      providers: [{provide: CartDiscountService, useValue: cartDiscountServiceSpy}, ShoppingCartService]
     })
     .compileComponents();
   }));
@@ -166,7 +167,7 @@ describe('ShoppingCartListComponent', () => {
         })
       ];
 
-      const expectedResult = 'isbn1,isbn2';
+      const expectedResult = ['isbn1', 'isbn2'];
       // When
       component.getPriceAfterBestDiscount();
 

@@ -5,6 +5,7 @@ import { BookCardComponent } from './components/book-card/book-card.component';
 import { SharedModule } from '../shared/shared.module';
 import { BookDetailsComponent } from './pages/book-details/book-details.component';
 import { BookSearchComponent } from './components/book-search/book-search.component';
+import { BooksService } from './shared/books.service';
 
 @NgModule({
   imports: [
@@ -16,6 +17,9 @@ import { BookSearchComponent } from './components/book-search/book-search.compon
     BookCardComponent,
     BookSearchComponent,
     BookDetailsComponent
+  ],
+  providers: [
+    BooksService
   ]
 })
 

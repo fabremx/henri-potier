@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ShoppingCart } from 'src/app/shared/models/shopping-cart';
 import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.service';
 import { BookQuantity } from '../../shared/book-quantity';
-import { countBy, find, join, min } from 'lodash'
+import { countBy, find } from 'lodash'
 import { CartDiscountService } from '../../shared/cart-discount.service';
 import { DiscountOffers } from '../../shared/discount-offers';
 
@@ -17,8 +17,10 @@ export class ShoppingCartListComponent implements OnInit {
   priceBeforeDiscount: number;
   priceAfterDiscount: number;
 
-  constructor(private shoppingCartService: ShoppingCartService,
-    private cartDiscountServive: CartDiscountService) { }
+  constructor(
+    private shoppingCartService: ShoppingCartService,
+    private cartDiscountServive: CartDiscountService
+  ) { }
 
   ngOnInit() {
     this.shoppingCart = this.shoppingCartService.getShoppingCart();
@@ -48,51 +50,41 @@ export class ShoppingCartListComponent implements OnInit {
   }
 
   getPriceAfterBestDiscount() {
-    const discountPriceList: Array<number> = []
     const booksOccurence = countBy(this.shoppingCart.bookList, 'isbn');
     const isbnList = Object.keys(booksOccurence);
 
-    this.cartDiscountServive.getDiscountOffers(join(isbnList, ','))
+    this.cartDiscountServive.getDiscountOffers(isbnList)
       .subscribe((discountOffers: DiscountOffers) => {
-        discountOffers.offers.forEach(offer => {
-          let priceAfterDiscount;
-          let discountInfo
-
-          switch (offer.type) {
-            case 'percentage':
-              discountInfo = find(discountOffers.offers, ['type', 'percentage']);
-              priceAfterDiscount = this.calculPercentageDiscount(discountInfo);
-              break;
-            case 'minus':
-              discountInfo = find(discountOffers.offers, ['type', 'minus']);
-              priceAfterDiscount = this.calculMinusDiscount(discountInfo);
-              break;
-            case 'slice':
-              discountInfo = find(discountOffers.offers, ['type', 'slice']);
-              priceAfterDiscount = this.calculSliceDiscount(discountInfo);
-              break;
-          }
-
-          discountPriceList.push(priceAfterDiscount);
-        });
-
-        this.priceAfterDiscount = min(discountPriceList);
+        const pricesAfterDiscount = discountOffers.offers.map(this.calculDiscountPrice);
+        this.priceAfterDiscount = Math.min(...pricesAfterDiscount);
       },
       (error) => {
         alert('error');
+        console.log(error);
       });
   }
 
-  private calculPercentageDiscount(discountInfo) {
-    return this.priceBeforeDiscount - (this.priceBeforeDiscount * (discountInfo.value / 100));
+  private calculDiscountPrice = (offer) => {
+    switch (offer.type) {
+      case 'percentage':
+        return this.calculPercentageDiscount(offer.value);
+      case 'minus':
+        return this.calculMinusDiscount(offer.value);
+      case 'slice':
+        return this.calculSliceDiscount(offer.value, offer.sliceValue);
+    }
   }
 
-  private calculMinusDiscount(discountInfo) {
-    return this.priceBeforeDiscount - discountInfo.value
+  private calculPercentageDiscount(discountValue: number): number {
+    return this.priceBeforeDiscount - (this.priceBeforeDiscount * (discountValue / 100));
   }
 
-  private calculSliceDiscount(discountInfo) {
-    const numberOfSlice = Math.floor(this.priceBeforeDiscount / discountInfo.sliceValue);
-    return this.priceBeforeDiscount - (numberOfSlice * discountInfo.value);
+  private calculMinusDiscount(discountValue: number): number {
+    return this.priceBeforeDiscount - discountValue;
+  }
+
+  private calculSliceDiscount(discountValue: number, sliceValue: number): number {
+    const numberOfSlice = Math.floor(this.priceBeforeDiscount / sliceValue);
+    return this.priceBeforeDiscount - (numberOfSlice * discountValue);
   }
 }

@@ -8,6 +8,7 @@ import { BookCardComponent } from '../../components/book-card/book-card.componen
 import { FormsModule } from '@angular/forms';
 import { BookSearchComponent } from '../../components/book-search/book-search.component';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('BooksListComponent', () => {
   let component: BooksListComponent;
@@ -33,7 +34,7 @@ describe('BooksListComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ BooksListComponent, BookCardComponent, BookSearchComponent ],
-      imports: [FormsModule, RouterModule.forRoot([])],
+      imports: [FormsModule, RouterModule.forRoot([]), SharedModule],
       providers: [{provide: BooksService, useValue: booksServiceSpy}]
     })
     .compileComponents();
@@ -53,32 +54,32 @@ describe('BooksListComponent', () => {
   });
 
   describe('getBooks', () => {  
-    it('should pass loader to false when getBooks succeed', async () => {
+    it('should pass loader to false when getBooks succeed', () => {
       // When
-      await component.getBooks();
+      component.getBooks();
   
       // Then
       expect(component.loader).toEqual(false);
     });
 
-    it('should pass loader to false when getBooks failed', async () => {
+    it('should pass loader to false when getBooks failed', () => {
       // Given
       booksServiceSpy.getBooks.and.returnValue(throwError(new Error('failed!')));
 
       // When
-      await component.getBooks();
+      component.getBooks();
   
       // Then
       expect(component.loader).toEqual(false);
     });
 
-    it('should call alert when getBooks failed', async () => {
+    it('should call alert when getBooks failed', () => {
       // Given
       spyOn(console, 'error');
       booksServiceSpy.getBooks.and.returnValue(throwError(new Error('failed!')));
 
       // When
-      await component.getBooks();
+      component.getBooks();
   
       // Then
       expect(window.alert).toHaveBeenCalled();

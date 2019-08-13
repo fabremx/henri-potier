@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './core/components/header/header.component';
 import { FooterComponent } from './core/components/footer/footer.component';
+import { SharedModule } from './shared/shared.module';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -16,7 +17,8 @@ describe('AppComponent', () => {
       ],
       imports: [
         RouterTestingModule,
-        RouterModule.forRoot([])
+        RouterModule.forRoot([]),
+        SharedModule
       ]
     }).compileComponents();
   }));

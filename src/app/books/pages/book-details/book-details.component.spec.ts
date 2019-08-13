@@ -52,38 +52,38 @@ describe('BookDetailsComponent', () => {
   });
 
   describe('getBook', () => {  
-    it('should pass loader to false when getBook succeed', async () => {
+    it('should pass loader to false when getBook succeed', () => {
       // Given
       component.loader = true;
       const isbn = 'isbn';
 
       // When
-      await component.getBook(isbn);
+      component.getBook(isbn);
   
       // Then
       expect(component.loader).toEqual(false);
     });
 
-    it('should pass loader to false when getBooks failed', async () => {
+    it('should pass loader to false when getBooks failed', () => {
       // Given
       const isbn = 'isbn';
       booksServiceSpy.getBook.and.returnValue(throwError(new Error('failed!')));
 
       // When
-      await component.getBook(isbn);
+      component.getBook(isbn);
   
       // Then
       expect(component.loader).toEqual(false);
     });
 
-    it('should call alert when getBooks failed', async () => {
+    it('should call alert when getBooks failed', () => {
       // Given
       const isbn = 'isbn';
       spyOn(console, 'error');
       booksServiceSpy.getBook.and.returnValue(throwError(new Error('failed!')));
 
       // When
-      await component.getBook(isbn);
+      component.getBook(isbn);
   
       // Then
       expect(console.error).toHaveBeenCalled();
@@ -92,7 +92,7 @@ describe('BookDetailsComponent', () => {
   });
 
   describe('addBookToShoppingCart', () => {
-    it('should call addBookToShoppingCart function', async(() => {
+    it('should call addBookToShoppingCart function', () => {
       // Given
       const book = new Book();
 
@@ -101,6 +101,6 @@ describe('BookDetailsComponent', () => {
 
       // Then
       expect(shoppingCartServiceSpy.addBookToShoppingCart).toHaveBeenCalledWith(book);
-    }));
+    });
   });
 });

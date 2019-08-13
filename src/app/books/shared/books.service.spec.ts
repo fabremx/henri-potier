@@ -33,12 +33,12 @@ describe('Book Service', () => {
   });
     
   describe(('getBooks'), () => {
-    it('should call correct API URL', async () => {
+    it('should call correct API URL', () => {
       // Given
       const expectedUrl = 'http://henri-potier.xebia.fr/books';
   
       // When
-      await booksService.getBooks();
+      booksService.getBooks();
 
       // Then
       expect(httpClientSpy.get).toHaveBeenCalledWith(expectedUrl);
@@ -71,13 +71,13 @@ describe('Book Service', () => {
   });
 
   describe(('getBook'), () => {
-    it('should call correct API URL', async () => {
+    it('should call correct API URL', () => {
       // Given
       const isbn = 'isbn1';
       const expectedUrl = 'http://henri-potier.xebia.fr/books';
   
       // When
-      await booksService.getBook(isbn);
+      booksService.getBook(isbn);
 
       // Then
       expect(httpClientSpy.get).toHaveBeenCalledWith(expectedUrl);

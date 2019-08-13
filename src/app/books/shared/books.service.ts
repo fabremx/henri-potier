@@ -5,9 +5,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ApiURLConfig } from 'src/app/configs/apiURL.config';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class BooksService {
 
   constructor(private http: HttpClient) { }
