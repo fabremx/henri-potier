@@ -4,7 +4,7 @@ import { ShoppingCartService } from 'src/app/shared/services/shopping-cart.servi
 import { BookQuantity } from '../../shared/book-quantity';
 import { countBy, find } from 'lodash'
 import { CartDiscountService } from '../../shared/cart-discount.service';
-import { DiscountOffers } from '../../shared/discount-offers';
+import { DiscountOffers, ClassicDiscount, SliceDiscount } from '../../shared/discount-offers';
 import { join } from 'lodash'
 
 @Component({
@@ -36,7 +36,7 @@ export class ShoppingCartListComponent implements OnInit {
   }
 
   getBookListWithQuantity(): BookQuantity[] {
-    const booksQuantity = []
+    const booksQuantity = [];
     const booksOccurence = countBy(this.shoppingCart.bookList, 'isbn');
     const isbnList = Object.keys(booksOccurence);
     
@@ -50,7 +50,7 @@ export class ShoppingCartListComponent implements OnInit {
     return booksQuantity;
   }
 
-  getPriceAfterBestDiscount() {
+  getPriceAfterBestDiscount(): void {
     const booksOccurence = countBy(this.shoppingCart.bookList, 'isbn');
     const isbnList = Object.keys(booksOccurence);
     const queryParam = isbnList ? join(isbnList, ',') : '';
@@ -66,7 +66,7 @@ export class ShoppingCartListComponent implements OnInit {
       });
   }
 
-  private calculDiscountPrice = (offer) => {
+  private calculDiscountPrice = (offer: ClassicDiscount & SliceDiscount): number => {
     switch (offer.type) {
       case 'percentage':
         return this.calculPercentageDiscount(offer.value);

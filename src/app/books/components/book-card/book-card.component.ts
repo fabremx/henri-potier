@@ -12,8 +12,7 @@ export class BookCardComponent implements OnInit {
   
   constructor(private shoppingCartService: ShoppingCartService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   addBookToShoppingCart(book: Book): void {
     this.shoppingCartService.addBookToShoppingCart(book);
