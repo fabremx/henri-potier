@@ -5,6 +5,7 @@ import { BookQuantity } from '../../shared/book-quantity';
 import { countBy, find } from 'lodash'
 import { CartDiscountService } from '../../shared/cart-discount.service';
 import { DiscountOffers } from '../../shared/discount-offers';
+import { join } from 'lodash'
 
 @Component({
   selector: 'app-shopping-cart-list',
@@ -52,8 +53,9 @@ export class ShoppingCartListComponent implements OnInit {
   getPriceAfterBestDiscount() {
     const booksOccurence = countBy(this.shoppingCart.bookList, 'isbn');
     const isbnList = Object.keys(booksOccurence);
+    const queryParam = isbnList ? join(isbnList, ',') : '';
 
-    this.cartDiscountServive.getDiscountOffers(isbnList)
+    this.cartDiscountServive.getDiscountOffers(queryParam)
       .subscribe((discountOffers: DiscountOffers) => {
         const pricesAfterDiscount = discountOffers.offers.map(this.calculDiscountPrice);
         this.priceAfterDiscount = Math.min(...pricesAfterDiscount);

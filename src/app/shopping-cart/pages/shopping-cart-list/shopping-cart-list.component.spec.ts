@@ -167,7 +167,7 @@ describe('ShoppingCartListComponent', () => {
         })
       ];
 
-      const expectedResult = ['isbn1', 'isbn2'];
+      const expectedResult = 'isbn1,isbn2';
       // When
       component.getPriceAfterBestDiscount();
 
