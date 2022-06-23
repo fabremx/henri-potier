@@ -42,7 +42,7 @@
     "ignore-styles": "^5.0.1",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
-    "jsdom": "^15.1.1",
+    "jsdom": "^16.5.0",
     "jsdom-global": "^3.0.2",
     "karma": "~4.1.0",
     "karma-chrome-launcher": "~2.2.0",
